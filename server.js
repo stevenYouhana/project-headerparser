@@ -23,7 +23,20 @@ app.get("/", function (req, res) {
 app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
-
+app.get('/api/whoami', (req, res) => {
+	/* tip for finding IP
+	const ip = req.headers['x-forwarded-for'] ||
+    req.connection.remoteAddress ||
+    req.socket.remoteAddress ||
+    req.connection.socket.remoteAddress;
+	*/
+	
+	res.json({
+    "ipaddress": req.headers['x-forwarded-for'],
+    "language": req.headers['accept-language'],
+    "software": req.headers['user-agent']
+  });
+});
 
 
 // listen for requests :)
